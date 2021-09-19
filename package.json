@@ -1,0 +1,11 @@
+{
+  "name": "trabalho-backend",
+  "version": "1.0.0",
+  "description": "backend demonstrativa do trabalho final da disciplina de sistemas embarcados da UFSC - Universidade Federal Santa Catarina",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose Ribamar Jr",
+  "license": "ISC"
+}

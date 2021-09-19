@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const CadastroSchema = new Schema({
+const Cadastro = new Schema({
  status_lampada: {
   type: Boolean, 
   required: [true, 'Status Obrigatório'], 
@@ -21,4 +21,4 @@ const CadastroSchema = new Schema({
   required: [true, 'Voltagem Obrigatória']}
  });
 // Exportar o modelo
-module.exports = mongoose.model('Cadastro', CadastroSchema);
+module.exports = mongoose.model('Cadastro', Cadastro);

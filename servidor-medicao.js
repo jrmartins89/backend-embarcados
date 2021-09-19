@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(cors());
 
 //Servidor
 let porta = 8080;
@@ -10,24 +12,15 @@ app.listen(porta, () => {
  console.log('Servidor em execução na porta: ' + porta);
 });
 
-const DadosSensores = require('./model/Cadastro').default
 
 //Acesso ao BD
-
-//const uri = 'mongodb+srv://jrmartins89:Pillows@1@meubackendarduino.v0krp.mongodb.net/MeuBackendArduino?retryWrites=true&w=majority';
-const database_name = 'MeuBeckendArduino';
-const collection_name= 'DadosSensores'
-var db;
+const Cadastro = require('./model/Cadastro').default;
 const MongoClient = require('mongodb').MongoClient;
-//const { MongoClient } = require('mongodb');
+const { $where } = require('./model/Cadastro');
 const uri = "mongodb+srv://jrmartins89:b7Bd0o6vhkjzS8os@meubackendarduino.v0krp.mongodb.net/MeuBackendArduino?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("MeuBackendArduino").collection("DadosSensores");
-  // perform actions on the collection object
-  client.close();
-});
-
+const database_name = 'MeuBeckendArduino';
+const collection_name= 'DadosSensores'; 
+var db;
 
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if(error) {

@@ -11,6 +11,11 @@ const CadastroSchema = new Schema({
   required: [true, 'Tipo Obrigatório'], 
   max: 100
  },
+ nome_lampada: {
+    type: String, 
+    required: [true, 'Nome Obrigatório'], 
+    max: 100
+},
  voltagem: {
   type: String, 
   required: [true, 'Voltagem Obrigatória']}

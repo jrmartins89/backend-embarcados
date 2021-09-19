@@ -41,9 +41,9 @@ app.get('/Cadastro', (req, res, next) => {
     });
 });
 
-// Obtém cadastro do usuário com base no CPF
-app.get('/Cadastro/:tipo', (req, res, next) => {
-    const result = db.findOne({ "tipo": req.params.cpf }, (err, result) => {
+// Obtém cadastro do usuário com base no tipo de lâmpada
+app.get('/Cadastro/:tipo_lampada', (req, res, next) => {
+    const result = db.findOne({ "tipo": req.params.tipo_lampada }, (err, result) => {
     if (err) return console.log("Tipo de lâmpada não encontrada!")
     res.send(result);
     });
@@ -55,7 +55,8 @@ app.post('/Cadastro', (req, res, next) => {
     var dados_lampada = new Cadastro({
         "status_lampada": req.body.status_lampada,
         "tipo_lampada": req.body.tipo_lampada,
-        "voltagem": req.body.voltagem
+        "voltagem": req.body.voltagem,
+        "nome_lampada": req.body.nome_lampada
      });
     db.insertOne(dados_lampada, (err, result) => {
         if (err) return console.log("Error: " + err);
@@ -65,15 +66,16 @@ app.post('/Cadastro', (req, res, next) => {
 });
 
 // Altera um cadastro
-app.put('/Cadastro/:tipo', (req, res, next) => {
-    db.updateOne({"tipo": req.params.tipo_lampada }, {
+app.put('/Cadastro/:nome_lampada', (req, res, next) => {
+    db.updateOne({"nome": req.params.nome_lampada }, {
         $set: {
-          "tipo_lampada": req.body.tipo_lampada
+          "tipo_lampada": req.body.tipo_lampada,
+          "voltagem": req.body.voltagem
               }
     }, (err, result) => {
         if (err) return console.log("Error: " + err);
-        console.log('Tipo de lâmpada alterado com sucesso!');
-        res.send('Tipo de lâmpada alterado com sucesso!');
+        console.log('Cadastro de lâmpada alterado com sucesso!');
+        res.send('Cadastro de lâmpada alterado com sucesso!');
     });
 });
 
@@ -82,11 +84,11 @@ app.get('/hello', (req, res) => {
     res.send('Hello World');
    });
 
-//Remover cadastro de usuário
-app.delete('/Cadastro/:cpf', (req, res, next) => {
-    db.deleteOne({cpf: req.params.cpf },(err, result) => {
+//Remover cadastro de lâmpada
+app.delete('/Cadastro/:nome_lampada', (req, res, next) => {
+    db.deleteOne({cpf: req.params.nome_lampada },(err, result) => {
         if (err) return console.log("Error: " + err);
-        console.log('Cadastro do cliente removido!');
-        res.send('Cadastro do cliente removido!');
+        console.log('Cadastro de lâmpada removido!');
+        res.send('Cadastro de lâmpada removido!');
     });
 });

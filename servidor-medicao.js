@@ -14,12 +14,12 @@ app.listen(porta, () => {
 
 
 //Acesso ao BD
-const Cadastro = require('./model/Cadastro').default;
+const Cadastro = require('./model/Cadastro.js').default;
 const MongoClient = require('mongodb').MongoClient;
 const { $where } = require('./model/Cadastro');
 const uri = "mongodb+srv://jrmartins89:b7Bd0o6vhkjzS8os@meubackendarduino.v0krp.mongodb.net/MeuBackendArduino?retryWrites=true&w=majority";
-const database_name = 'MeuBeckendArduino';
-const collection_name= 'DadosSensores'; 
+const database_name = 'MeuBackendArduino';
+const collection_name= 'Cadastro'; 
 var db;
 
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {

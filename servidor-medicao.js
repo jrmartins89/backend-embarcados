@@ -10,14 +10,25 @@ app.listen(porta, () => {
  console.log('Servidor em execução na porta: ' + porta);
 });
 
-const DadosSensores = require('./model/cadastro')
+const DadosSensores = require('./model/Cadastro').default
 
 //Acesso ao BD
-const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb+srv://jrmartins89:<password>@meubackendarduino.v0krp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+//const uri = 'mongodb+srv://jrmartins89:Pillows@1@meubackendarduino.v0krp.mongodb.net/MeuBackendArduino?retryWrites=true&w=majority';
 const database_name = 'MeuBeckendArduino';
 const collection_name= 'DadosSensores'
 var db;
+const MongoClient = require('mongodb').MongoClient;
+//const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://jrmartins89:b7Bd0o6vhkjzS8os@meubackendarduino.v0krp.mongodb.net/MeuBackendArduino?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("MeuBackendArduino").collection("DadosSensores");
+  // perform actions on the collection object
+  client.close();
+});
+
+
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if(error) {
             throw error;
@@ -86,7 +97,7 @@ app.get('/hello', (req, res) => {
 
 //Remover cadastro de lâmpada
 app.delete('/Cadastro/:nome_lampada', (req, res, next) => {
-    db.deleteOne({cpf: req.params.nome_lampada },(err, result) => {
+    db.deleteOne({nome_lampada: req.params.nome_lampada },(err, result) => {
         if (err) return console.log("Error: " + err);
         console.log('Cadastro de lâmpada removido!');
         res.send('Cadastro de lâmpada removido!');

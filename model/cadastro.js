@@ -21,4 +21,4 @@ const CadastroSchema = new Schema({
   required: [true, 'Voltagem Obrigatória']}
  });
 // Exportar o modelo
-module.exports = mongoose.model('cadastro', CadastroSchema);
+module.exports = mongoose.model('Cadastro', CadastroSchema);

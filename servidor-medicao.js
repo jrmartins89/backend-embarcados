@@ -3,10 +3,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Hello
-app.get('/hello', (req, res) => {
- res.send('Hello World');
-});
 
 //Servidor
 let porta = 8080;
@@ -34,6 +30,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
+////////////////////////////////CHAMADAS DOS MÉTODOS///////////////////////////////////////////////////////////
+
+
+// Obtém todos os cadastros
+app.get('/Cadastro', (req, res, next) => {
+    db.find({}).toArray((err, result) => {
+        if (err) return console.log("Error: " + err);
+        res.send(result);
+    });
+});
+
+// Obtém cadastro do usuário com base no CPF
+app.get('/Cadastro/:tipo', (req, res, next) => {
+    const result = db.findOne({ "tipo": req.params.cpf }, (err, result) => {
+    if (err) return console.log("Tipo de lâmpada não encontrada!")
+    res.send(result);
+    });
+});
+
+
 //Método para cadastro de dados da lâmpada
 app.post('/Cadastro', (req, res, next) => {
     var dados_lampada = new Cadastro({
@@ -47,3 +63,22 @@ app.post('/Cadastro', (req, res, next) => {
         res.send('Dados da lâmpada cadastrado com sucesso!');
     });
 });
+
+// Altera um cadastro
+app.put('/Cadastro/:cpf', (req, res, next) => {
+    db.updateOne({"cpf": req.params.cpf }, {
+        $set: {
+          "nome": req.body.nome,
+          "email": req.body.email        }
+    }, (err, result) => {
+        if (err) return console.log("Error: " + err);
+        console.log('Cadastro do cliente alterado com sucesso!');
+        res.send('Cadastro do cliente alterado com sucesso!');
+    });
+});
+
+// Hello
+app.get('/hello', (req, res) => {
+    res.send('Hello World');
+   });
+   

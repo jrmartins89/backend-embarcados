@@ -65,15 +65,15 @@ app.post('/Cadastro', (req, res, next) => {
 });
 
 // Altera um cadastro
-app.put('/Cadastro/:cpf', (req, res, next) => {
-    db.updateOne({"cpf": req.params.cpf }, {
+app.put('/Cadastro/:tipo', (req, res, next) => {
+    db.updateOne({"tipo": req.params.tipo_lampada }, {
         $set: {
-          "nome": req.body.nome,
-          "email": req.body.email        }
+          "tipo_lampada": req.body.tipo_lampada
+              }
     }, (err, result) => {
         if (err) return console.log("Error: " + err);
-        console.log('Cadastro do cliente alterado com sucesso!');
-        res.send('Cadastro do cliente alterado com sucesso!');
+        console.log('Tipo de lâmpada alterado com sucesso!');
+        res.send('Tipo de lâmpada alterado com sucesso!');
     });
 });
 
@@ -81,4 +81,12 @@ app.put('/Cadastro/:cpf', (req, res, next) => {
 app.get('/hello', (req, res) => {
     res.send('Hello World');
    });
-   
+
+//Remover cadastro de usuário
+app.delete('/Cadastro/:cpf', (req, res, next) => {
+    db.deleteOne({cpf: req.params.cpf },(err, result) => {
+        if (err) return console.log("Error: " + err);
+        console.log('Cadastro do cliente removido!');
+        res.send('Cadastro do cliente removido!');
+    });
+});

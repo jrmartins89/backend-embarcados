@@ -14,6 +14,7 @@ app.listen(porta, () => {
  console.log('Servidor em execução na porta: ' + porta);
 });
 
+
 const Cadastro = require('./model/cadastro')
 
 //Acesso ao BD

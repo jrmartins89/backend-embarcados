@@ -71,7 +71,7 @@ app.put('/Cadastro/:nome_lampada', (req, res, next) => {
     }, (err, result) => {
         if (err) return console.log("Error: " + err);
         console.log('Cadastro da lampada alterado com sucesso!');
-        res.send('Cadastro da lampada alterado com sucesso!');
+        res.send('Cadastro da lampada    alterado com sucesso!');
     });
 });
 
